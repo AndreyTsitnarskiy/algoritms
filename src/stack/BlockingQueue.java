@@ -1,21 +1,21 @@
 package stack;
 
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.concurrent.ArrayBlockingQueue;
+
+import static java.lang.System.out;
 
 public class BlockingQueue {
     public static void main(String[] args) {
 
-        ArrayBlockingQueue<String> queue = new ArrayBlockingQueue<>(10);
-        ArrayList<String> list = generatorQueue();
+        ArrayBlockingQueue<String> queue = new ArrayBlockingQueue<>(3);
 
         Thread producer = new Thread(() -> {
-            for (int i = 0; i < list.size() && Thread.interrupted();) {
+            String[] listWords = new String[] {"list", "words", "nokia", "notepad", "stack", "arrays", "doom", "kill", "frost"};
+            for (int i = 0; i < listWords.length && !Thread.interrupted();) {
                 try {
                     Thread.sleep(5000);
-                    queue.put(list.get(i));
-                    System.out.println("Producer write: " + list.get(i));
+                    queue.put(listWords[i]);
+                    out.println("Producer write: " + listWords[i]);
                     i++;
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
@@ -44,22 +44,5 @@ public class BlockingQueue {
             throw new RuntimeException(e);
         }
         consumer.start();
-    }
-
-    private static ArrayList<String> generatorQueue() {
-        Random random = new Random();
-        ArrayList<String> list = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < 30; i++) {
-            char a = (char) (random.nextInt(26) + 'a');
-            char b = (char) (random.nextInt(26) + 'a');
-            char c = (char) (random.nextInt(26) + 'a');
-            char d = (char) (random.nextInt(26) + 'a');
-            char e = (char) (random.nextInt(26) + 'a');
-            String result = sb.append(a).append(b).append(c).append(d).append(e).toString();
-            list.add(result);
-            sb.setLength(0);
-        }
-        return list;
     }
 }

@@ -6,15 +6,14 @@ import java.util.List;
 public class CalculusMain {
     public static void main(String[] args) {
 
-        String expr = getIntRadix(345363232,16);
-        String expr1 = getIntRadix(345363232,2);
+        String expr = getIntRadix(12342135,16);
+        String expr1 = getIntRadix(12342135,2);
         int result = getIntTenRadix(expr, 16);
         int result1 = getIntTenRadix(expr1, 2);
         System.out.println(expr);
         System.out.println(result);
         System.out.println(expr1);
         System.out.println(result1);
-
     }
 
     public static String getIntRadix(int number, int radix) {
